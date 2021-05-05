@@ -12,21 +12,35 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    NetlifyIdentity.on('login', (user) => {
+    NetlifyIdentity.on('login', user => {
       setUser(user);
       NetlifyIdentity.close();
     });
 
+    NetlifyIdentity.on('logout', user => {
+      setUser(null);
+    });
+
     NetlifyIdentity.init();
+
+    return () => {
+      NetlifyIdentity.off('login');
+      NetlifyIdentity.off('logout');
+    };
   }, []);
 
   const login = () => {
     NetlifyIdentity.open();
   };
 
+  const logout = () => {
+    NetlifyIdentity.logout();
+  };
+
   const context = {
     user,
     login,
+    logout,
   };
 
   return (
