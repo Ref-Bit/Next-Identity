@@ -37,6 +37,10 @@ nav ul {
 nav li {
   display: inline-block;
   margin-left: 16px;
+  transition: all 0.15s ease-in-out;
+}
+nav li.a:hover {
+  font-weight: bold;
 }
 nav li.btn {
   padding: 10px 16px;
@@ -45,6 +49,7 @@ nav li.btn {
   font-weight: 600;
   color: var(--primary);
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
 }
 nav li.btn:hover {
   color: white;
